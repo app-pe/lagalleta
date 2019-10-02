@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <title>La galleta</title>
+    <title>Tienda Virtual La galleta</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="robots" content="index, follow">
@@ -45,36 +45,90 @@
       
       <div class="col-lg-2"></div>
       <div class="col-lg-8">
-             <img src="img/osogalleta.png" class="img-fluid rounded mx-auto d-block mt-2" alt="Responsive image" width="100px" height="150px">  
-      <h4><em>La Galleta</em></h4> 
+            <img src="img/osogalleta.png" class="img-fluid rounded mx-auto d-block mt-2" alt="Responsive image" width="100px" height="150px">
+      <h4><em>Tienda Virtual La galleta</em></h4> 
 
-<div class="form-inline">
-  <img src="img/galletafrac.jpg" class="img-fluid rounded mx-auto d-block mt-2" alt="Responsive image" width="200px" height="150px"> 
-<img src="img/galletacoronita.png" class="img-fluid rounded mx-auto d-block mt-2" alt="Responsive image" width="200px" height="150px">
-
-</div>
+      <div class="card-header text-center border-0 titulo1 mt-2" style="background-color: #5D5452">
+           <h5 class="slogan">Catálogo de galletas</h5>          
+       </div>
+      <!-- seccion de productos -->
+      <div id="seccionProd"></div>  
  
       </div>
       <div class="col-lg-2"></div>
 
+
+
   
-         </div>  
-     <div class="card-header text-center border-0 titulo1 mt-2" style="background-color: #efe7f2">
-          <h5 class="slogan">Pide tu galleta por whatsapp dando clik al boton</h5>          
+    </div>  
+
+    <div class="card-header text-center border-0 titulo1 mt-2" style="background-color: #5D5452">
+         <h5 class="slogan">Carrito de compras</h5>          
+     </div>
+
+    <div class="row mt-2">      
+      <!-- seccion de información del carrito -->
+      <div class="container" align="center">
+        <!--<h5 class="card-title text-center" id="desProducto">Carrito de compras</h5>-->
+        <div class="col-lg-4 mb-2">
+        <label><strong>Seleccione un medio de pago</strong></label>
+        <select class="form-control" id="mediopago">          
+          <option value="1">EFECTIVO</option>
+          <option value="2">BCP</option>
+          <option value="3">BBVA</option>
+          <option value="4">YAPE</option>
+          <option value="5">TUNKI</option>
+        </select>
+        </div>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <!--<th scope="col">#</th>-->
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
+          </tr>
+        </thead>
+        <tbody id="mitabla">
+      
+        </tbody>
+        <tfoot>
+            <tr>
+              <td></td>
+              <td class="font-weight-bold">Subtotal</td>
+              <td id="subtotal" class="font-weight-bold"></td>
+            </tr>
+          </tfoot>
+      </table>
+
+      </div>
+    </div>
+     <div class="card-header text-center border-0 titulo1 mt-2" style="background-color: #5D5452">
+          <h5 class="slogan">Enviar pedido dando clik al boton WhatsApp</h5>          
       </div>
       <!-- canal-whatsapp -->
-      <div align="center">
-
-
-        
-
-        <a href="http://bit.ly/canal-consultas"">
-          <img src="img/boton-whatsapp.jpg" class="center-block img-responsive" alt="" width="200" height="100"  />  </a>  
-      </div>           
+      <div class="card-body text-center my-auto" style="height: 60px">
+         <div class="titulo2"><strong>ENVIAR PEDIDO</strong>
+          <a href="#" id="enlace">
+          <img src="img/wasap.jpg" class="center-block img-responsive" alt="" width="30" height="30" onclick="enviarPedido()"> 
+          </a>    
+         </div>  
+      </div>         
       <!-- footer -->
-      <footer class="container">        
-        <p class="text-muted text-center"></p>
-      </footer>
+          
+        <div class="card-footer" style="background-color: #5D5452">
+          <div class="row"><!--
+            <div class="col-sm-6 text-center">
+              <p class="text-white">
+                <small>Av. Las Vegas 845, Zona Industrial San Juan de Miraflores, Lima-Perú – Phone (+51 1) 205-5656</small>
+              </p>
+            </div>-->
+            <div class="col-sm-12 text-center">
+              <p class="text-white"><small>© 2019 - Tienda Virtual La Galleta - todos los derechos reservados</small></p>    
+            </div>
+          </div>
+        </div>
+      
     </main>
    
 
@@ -83,5 +137,143 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  
+    <script type="text/javascript">
+      // variables globales 
+      var chart ="";    
+      var numProd = 3;
+      var conta = 1;
+      var d="";
+      var sub = "0";
+      var listadoProductoCantidad ="";
+
+      // json de productos
+      var datos = [            
+            {
+            "producto": "Frac chocolate",
+            "imagen": "galletafracchoco.jpg",
+            "precio": "1"
+            },     
+            {
+            "producto": "Frac crema de chocolate",
+            "imagen": "galletafrac.jpg",
+            "precio": "1"
+            },       
+            {
+            "producto": "Frac crema de vainilla",
+            "imagen": "galletafracvainilla.jpg",
+            "precio": "1"
+            }           
+            ];
+
+      // cargamos la funcion al inicio
+      window.onload = generar_galeria();
+
+      function generar_galeria() {
+              for(var i = 0; i < datos.length; i++){          
+
+      chart += "<div class='card' id='prod"+i+"'>"+
+                  "<div class='row'>"+
+                    "<div class='col-md-4'>"+
+                      //"<img src='img/cerveza/pilsen/pilsen"+i+".jpg' class='card-img' alt='...'>"+
+                      "<img src='img/"+datos[i].imagen+"' class='card-img' alt='...'>"+
+                    "</div>"+
+                    "<div class='col-md-8'>"+
+                      "<div class='card-body'>"+      
+                        "<div class='row'>"+
+                          "<h5 class='card-title' id='desProducto"+i+"'>"+datos[i].producto+"</h5>"+
+                        "</div>"+
+                        "<div class='row'>"+
+                          "<p class='card-text'>Precio: S/&nbsp;</p>"+
+                          "<p class='card-text' id='desPrecio"+i+"'>"+datos[i].precio+"</p>"+
+                        "</div>"+
+                        "<div class='form-group row'>"+
+                          "<input type='button' value='-' class='qtyminus' field='quantity' id='btnmenos"+i+"' onclick='disminuirCantidad("+i+")' />"+
+                          "<input type='text' name='quantity' value='1' class='qty' id='txtcant"+i+"' style='width:30px;text-align: center;' readonly='readonly' />"+
+                          "<input type='button' value='+' class='qtyplus mr-2' field='quantity' id='btnmas"+i+"' onclick='aumentarCantidad("+i+")' />"+                        
+                          "<button class='btn btn-danger btn-sm' type='submit' id='btnagregarCarrito"+i+"' onclick='agregarCarrito("+i+")'>AGREGAR</button>"+
+                        "</div>"+
+                      "</div>"+
+                    "</div>"+
+                  "</div>"+
+                "</div>";    
+
+              }   
+              document.getElementById("seccionProd").innerHTML = chart;    
+      }
+
+      function aumentarCantidad(n){      
+        
+        var valor = document.getElementById('txtcant'+n).value;       
+        
+          if(valor < 10){
+            var suma = parseInt(valor) + parseInt(1);    
+            document.getElementById('txtcant'+n).value = suma;  
+            //conta++;
+          }
+      }
+
+      function disminuirCantidad(n){      
+
+        var valor = document.getElementById('txtcant'+n).value;      
+        
+          if(valor > 1){
+            var resta = parseInt(valor) - parseInt(1);      
+            document.getElementById('txtcant'+n).value = resta;  
+            //conta--;
+          }
+      }
+
+      function agregarCarrito(n){
+        var suma = parseInt(n) + parseInt(1);  
+        // capturar valor de cantidad
+        var cantidad = document.getElementById('txtcant'+n).value;      
+        // capturar producto
+        var producto = document.getElementById('desProducto'+n);          
+        var showproducto = producto.innerHTML;   
+
+        listadoProductoCantidad += "[Producto: "+showproducto+" - Cantidad: "+ cantidad+"] ";   
+        // capturar precio para sumarlo al final y calcular el subtotal
+        var precio = document.getElementById('desPrecio'+n);
+        var showprecio = precio.innerHTML;
+
+        var precioxcant = cantidad*showprecio;        
+        // hasta aqui tengo los valores independientes de cada producto, cantidad y precio cuando doy click en agregar
+
+        // ahora tengo que mostrar enuna tabla estos valores
+        d+= '<tr>'+
+         '<td>'+showproducto+'</td>'+
+         '<td>'+cantidad+'</td>'+
+         '<td>'+'S/ '+precioxcant+'</td>'+
+         '</tr>';
+
+        var element = document.getElementById("mitabla");
+        element.innerHTML = d;
+
+        sub = parseFloat(sub) + parseFloat(precioxcant); 
+        var element2 = document.getElementById("subtotal");
+        element2.innerHTML = "S/ "+sub;
+       //alert(showproducto+" cantidad:"+cantidad+" precio:"+showprecio);
+       
+      }
+
+      function enviarPedido(){
+        // enviar listado de producto, cantidad y subtotal por wasap
+        /* Para obtener el texto */
+        var combo = document.getElementById("mediopago");
+        var mpseleccionado = combo.options[combo.selectedIndex].text;        
+
+        var url = document.getElementById('enlace');
+        var datos = "Pedido: "+listadoProductoCantidad+"| Total a Pagar: S/ "+sub+" | Medio de Pago: "+mpseleccionado;
+        var baseUrl = "https://api.whatsapp.com/send?phone=51999781083&text="+datos;
+        console.log(url);
+        url.setAttribute('href',baseUrl);
+      }
+
+
+
+
+    </script>
+
   </body>
 </html>
