@@ -264,7 +264,7 @@
         var mpseleccionado = combo.options[combo.selectedIndex].text;        
 
         var url = document.getElementById('enlace');
-        var datos = "Pedido: "+listadoProductoCantidad+"| Total a Pagar: S/ "+sub+" | Medio de Pago: "+mpseleccionado;
+        var datos = "Pedido: "+listadoProductoCantidad+"/ Total a Pagar: S/ "+sub+" / Medio de Pago: "+mpseleccionado;
         var baseUrl = "https://api.whatsapp.com/send?phone=51999781083&text="+datos;
         console.log(url);
         url.setAttribute('href',baseUrl);
