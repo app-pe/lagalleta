@@ -232,7 +232,7 @@
         var producto = document.getElementById('desProducto'+n);          
         var showproducto = producto.innerHTML;   
 
-        listadoProductoCantidad += "[Producto: "+showproducto+" - Cantidad: "+ cantidad+"] ";   
+        listadoProductoCantidad += "[Producto: "+showproducto+" / Cantidad: "+ cantidad+"] ";   
         // capturar precio para sumarlo al final y calcular el subtotal
         var precio = document.getElementById('desPrecio'+n);
         var showprecio = precio.innerHTML;
@@ -264,7 +264,7 @@
         var mpseleccionado = combo.options[combo.selectedIndex].text;        
 
         var url = document.getElementById('enlace');
-        var datos = "Pedido: "+listadoProductoCantidad+"/ Total a Pagar: S/ "+sub+" / Medio de Pago: "+mpseleccionado;
+        var datos = "Pedido: "+listadoProductoCantidad+"[ Total a Pagar: S/ "+sub+" ] [Medio de Pago: "+mpseleccionado+"]";
         var baseUrl = "https://api.whatsapp.com/send?phone=51999781083&text="+datos;
         console.log(url);
         url.setAttribute('href',baseUrl);
