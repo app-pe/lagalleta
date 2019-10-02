@@ -73,11 +73,11 @@
         <div class="col-lg-4 mb-2">
         <label><strong>Seleccione un medio de pago</strong></label>
         <select class="form-control" id="mediopago">          
-          <option value="1">EFECTIVO</option>
-          <option value="2">BCP</option>
-          <option value="3">BBVA</option>
-          <option value="4">YAPE</option>
-          <option value="5">TUNKI</option>
+          <option value="1">Efectivo</option>
+          <option value="2">Bcp</option>
+          <option value="3">Bbva</option>
+          <option value="4">Yape</option>
+          <option value="5">Tunki</option>
         </select>
         </div>
       <table class="table table-sm">
@@ -232,7 +232,7 @@
         var producto = document.getElementById('desProducto'+n);          
         var showproducto = producto.innerHTML;   
 
-        listadoProductoCantidad += "["+showproducto+" / Cantidad: "+ cantidad+"] ";   
+        listadoProductoCantidad += "["+showproducto+" / cantidad: "+ cantidad+"] ";   
         // capturar precio para sumarlo al final y calcular el subtotal
         var precio = document.getElementById('desPrecio'+n);
         var showprecio = precio.innerHTML;
@@ -264,7 +264,7 @@
         var mpseleccionado = combo.options[combo.selectedIndex].text;        
 
         var url = document.getElementById('enlace');
-        var datos = "Pedido: "+listadoProductoCantidad+"[ Total a Pagar: S/ "+sub+" ] [Medio de Pago: "+mpseleccionado+"]";
+        var datos = "Pedido: "+listadoProductoCantidad+"[Total: S/ "+sub+"] [Medio Pago: "+mpseleccionado+"]";
         var baseUrl = "https://api.whatsapp.com/send?phone=51999781083&text="+datos;
         console.log(url);
         url.setAttribute('href',baseUrl);
