@@ -291,6 +291,19 @@
 
 
     </script>
-
+    
+  // bambuser   
+    
+<iframe src="https://cdn.bambuser.net/player/?resourceUri=https%3A%2F%2Fcdn.bambuser.net%2Fgroups%2F104416%2Fbroadcasts%3Fby_authors%3D%26title_contains%3D%26has_any_tags%3D%26has_all_tags%3D%26da_id%3D61d0e630-626a-c456-079e-c985a12f3a1a%26da_timestamp%3D1641933626%26da_signature_method%3DHMAC-SHA256%26da_ttl%3D0%26da_static%3D1%26da_signature%3D3479e6fd7c91106e55ed09675b4d9dc4aac9248db764d406a896d230d1455274" style="border: none" allowfullscreen></iframe>
+<button onclick="startBroadcasting();">Start</button>
+<script>
+  // Reference the embeded broadcaster iframe
+  var broadcaster = document.getElementById('my-broadcaster').contentWindow;
+  function startBroadcasting() {
+    if (!broadcaster) return;
+    // Post the start action via postMessage
+    broadcaster.postMessage({action: 'start'}, '*');
+  }
+</script>
   </body>
 </html>
