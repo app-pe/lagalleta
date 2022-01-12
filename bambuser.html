@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- CTA to initiate the call widget -->
+<button id="start-one-to-one">Get in touch with us</button>
+
+<script>
+// ======================================== Dummy product object ==============================================
+  const dummyProductObject = {
+      "productId": "1111",
+      "title": "Bambuser Hoodie",
+      "description": "World's best hoodie",
+      "brand": "Bambuser",
+      "price": 100,
+      "details": [
+          "Loose fit",
+          "Cropped length",
+          "Functional fabric with soft-touch"
+      ],
+      "slug": "/product/14/bambuser-hoodie/",
+      "collection": "Super soft series",
+      "original_price": 150,
+      "rating": {
+          "averageRating": 4,
+          "maxValue": 5,
+          "numberOfRatings": 23
+      },
+      "comparableAttributes": [{
+          "name": "Material",
+          "value": "Cotton",
+          "option": "100%"
+      },
+      {
+          "name": "Washing Instructons",
+          "value": "Washing Temperature",
+          "option": "40 degrees"
+      }
+      ],
+      "relatedProducts": [{
+          "title": "Bambuser Cap",
+          "sku": "2222",
+          "thumbnail": "https://demo.bambuser.shop/wp-content/uploads/2021/09/cap_600x.jpeg",
+          "price": 30
+      },
+      {
+          "title": "Bambuser Tote Bag",
+          "sku": "3333",
+          "thumbnail": "https://demo.bambuser.shop/wp-content/uploads/2020/09/bb-tote.png",
+          "price": 5
+      }
+      ],
+      "options": [{
+          "name": "Color",
+          "optionId": 1,
+          "values": [
+              "Black",
+              "White"
+          ]
+      },
+      {
+          "name": "Size",
+          "optionId": 2,
+          "values": [
+              "Small"
+          ]
+      }
+      ],
+      "variants": [{
+          "variationId": "1111-black-small",
+          "title": "Black Bambuser Hoodie",
+          "option1": "Black",
+          "option2": "Small",
+          "available": true,
+          "price": 100,
+          "original_price": 150,
+          "images": [
+              "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-front.png",
+              "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-right.jpeg",
+              "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-back.jpeg",
+              "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-left.jpeg"
+          ]
+      },
+      {
+          "variationId": "1111-white-small",
+          "title": "White Bambuser Hoodie",
+          "option1": "White",
+          "option2": "Small",
+          "available": false,
+          "price": 100,
+          "original_price": 150,
+          "images": [
+              "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-front.png",
+              "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-right.jpeg",
+              "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-back.jpeg",
+              "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-left.jpeg"
+          ]
+      }
+      ]
+  };
+
+//======================================== Define your own helper methods ==============================================
+  const storeApi = {};
+
+  // Retrieve the product and return the details
+  storeApi.getProduct = (productIdentifier) => {
+      // TODO: Implement your logic for fetching your own product object
+      // e.g. fetch('/products/[productIdentifier]', { method: 'GET' });
+
+      return Promise.resolve(
+          dummyProductObject
+      );
+  };
+
+
+  // Add product to the native cart by SKU 
+  // Return the result (success and reason in case of failure)
+  storeApi.addToCart = (sku) => {
+      // TODO: Implement your logic for adding a product variation to your native cart
+      // e.g. fetch('/cart/add', { method: 'POST', body: JSON.stringify({ sku: sku, quantity: 1 }) });
+      return Promise.resolve({
+          success: true
+      });
+  };
+
+  // Update the quantity of a product in the native cart by SKU 
+  // Return the result (success and reason in case of failure)
+  storeApi.updateItemInCart = (sku, quantity) => {
+      // TODO: Implement your logic for updating your native cart
+      // e.g. fetch('/cart/update', { method: 'POST', body: JSON.stringify({ sku: sku, quantity: quantity }) });
+      return Promise.resolve({
+          success: true
+      });
+  };
+
+  // Remove the product from your native cart by SKU 
+  // Return the result (success and reason in case of failure)
+  storeApi.removeItemFromCart = (sku, quantity) => {
+
+      // TODO: Implement your logic for removing the product from your native cart
+      // e.g. fetch('/cart/remove', { method: 'POST', body: JSON.stringify({ sku: sku, quantity: 0 }) });
+      return Promise.resolve({
+          success: true
+      });
+
+  };
+
+
+//======================================== Bambuser onReady Handler ==============================================
+  window.onBambuserOneToOneReady = function (BambuserOneToOneEmbed) {
+
+      // This method will be invoked when embed.js has loaded and Bambuser
+      // One-to-One API is available.
+      // Creating an instance directly will allow to detect connect links 
+      // that will automatically open the Live Meeting overlay on page load.
+      let oneToOneEmbed = new BambuserOneToOneEmbed({
+          orgId: 'https%3A%2F%2Fcdn.bambuser.net%2Fgroups%2F104416%2Fbroadcasts%3Fby_authors%3D%26title_contains%3D%26has_any_tags%3D%26has_all_tags%3D%26da_id%3D61d0e630-626a-c456-079e-c985a12f3a1a%26da_timestamp%3D1641995892%26da_signature_method%3DHMAC-SHA256%26da_ttl%3D0%26da_static%3D1%26da_signature%3D3223a5c8cb80a0a0d3d3abafdef477d3f5d6870ba5647dc3163e110be1f36287', // REPLACE THIS WITH YOUR OWN ORG ID
+      //  queue: 'QUEUE_ID_HERE', //if not specified, default queue configured from the dashboard will get applied
+
+          // ACTIVATE OVERLAY WIDGET
+          // The Overlay Widget (OLW) is an easy way to guide more visitors into the Call Widget.
+          // By appearing automatically after configurable amount of seconds it guides visitors towards sales help at the right time.
+          smartVariantOverride: 'Side dock', // force OLW variant 'Side dock'. Other option is 'Avatar'
+
+          triggers: [
+              'smart', // activate the overlay widget
+              'connect-link' // activate the connect link - unrelated to OLW, yet mandatory
+          ],
+          popupTimeoutSeconds: '5', // after how many seconds OLW appears on the first time page load (default = 60)
+
+          // PROVIDE CUSTOMER DATA​ 
+          // Below information will be presented to the Agent during a call
+          // You can either provide Build-in properties or custom properties
+          // A full list of build in properties can be found on 
+          // https://bambuser.com/docs/one-to-one/present-customer-data-to-agent/
+          data: {
+            firstName: "Joe", 
+            lastName: "Doe",
+            "Custom Field": "Test",
+         },
+
+          // Bambuser follow  ISO 639-1 Code + "-" + ISO 3166-2 as standard locale format.
+          // The value should be of type string
+          locale: 'en-US', // Call Widget language translation for the end user (default='en-US')
+          allowFirstPartyCookies: true, // Configures if embed script is allowed to write first party cookies for tracking purposes (default=true)
+          enableScanning: true, // Agent app will scan for barcodes and QR codes when adding product through scanning (default=false)
+      });
+
+      // Connect CTA button to open Bambuser One-to-One overlay.
+      let button = document.querySelector('#start-one-to-one');
+      button.addEventListener('click', () => {
+          oneToOneEmbed.show();
+      });
+
+
+      // The Call Widget triggeres 'provide-product-data' event when:
+      // 1. When an Agent enters a product identifier in the Agent Tool UI
+      // 2. When an Agent clicks on the "Recent Product" in the Agent Tool UI
+      // 3. When an Agent clicks on the "Related Product" in the Agent Tool UI
+      oneToOneEmbed.on("provide-product-data", (event) => {
+          event.products.forEach(async ({
+              ref,
+              type,
+              id: bambuserId
+          }) => {
+
+              // Mandatory to handle at least URL and SKU
+              // Use the references provided above to fetch your product object
+              // Provide product data to the widget using the methods below.
+
+                      // type: "url" | "product-reference" | "scanned-code"
+                      // let sku;
+                      // if (type === "url") {
+                      //    sku = yourMethodToTransformUrlToSku(ref)
+                      // } else if (type === "scanned-code") {
+                      //    sku = yourMethodToTransformBarcodeToSku(ref)
+                      // } else if (type === "product-reference") {
+                      //    sku = ref;
+                      // }
+
+              // Fetch your product object
+              const yourProduct = await storeApi.getProduct(ref);
+
+              // Product mapping​
+              oneToOneEmbed.updateProduct(bambuserId, (productFactory) => {
+
+                  return (
+                      productFactory
+
+                          // Mandatory
+                          // currency of the product
+                          .currency("USD")
+
+                          // Mandatory
+                          // locale that product is localized to
+                          .locale("en-US")
+
+                          // Mandatory
+                          // The product method contains a new chain
+                          // these are methods specific to this actual product
+                          .product((detailFactory) =>
+                              detailFactory
+
+                                  // Optional
+                                  // Localized name of the product
+                                  .name(yourProduct.title)
+
+                                  // Optional 
+                                  // Sku of your product
+                                  .sku(yourProduct.productId)
+
+                                  // Optional
+                                  // Define the index of specific variation
+                                  // which will be selected by default when
+                                  // agent fetches a product
+
+                                      // Example:
+                                      //.defaultVariationIndex(yourMethodToGetVariationIndex(ref, type))
+                                  .defaultVariationIndex(0)
+
+                                  // Mandatory
+                                  // localized description for the product
+                                  .description(yourProduct.description)
+
+                                  // Optional
+                                  // URL for product
+                                  .url(window.location.origin + yourProduct.slug)
+
+                                  // Mandatory
+                                  // The attributes method contains a new chain
+                                  // returned array defines any dimensions (e.g. color, size,...) of your product
+                                  .attributes((attribute) => {
+                                      return yourProduct.options.map((attr) =>
+
+                                          // Mandatory if your products contain more than one variant
+                                          // Attribute identifier
+                                          attribute(attr.optionId)
+
+                                              // Optional - If not provided, above specifed attribute identifier will replace it
+                                              // Localized name of the attribute
+                                              // This will show as a dropdown label in agent tool
+                                              .name(attr.name)
+
+                                              //Mandatory
+                                              // The options method contains a new chain
+                                              // Returned array available options of the dimension
+                                              .options((option) =>
+                                                  attr.values.map((optionName) =>
+
+                                                      // Mandatory
+                                                      // Option identifier
+                                                      option(optionName)
+
+                                                          // Optional
+                                                          // If not provided, above specifed option identifier will replace it
+                                                          // Localized name of the option
+                                                          // This will show as an option inside a dropdown in agent tool
+                                                          .name(optionName)
+                                                  )
+                                              )
+                                      );
+                                  })
+
+                                  // Mandatory
+                                  // The variations method contains a new chain
+                                  // Returned array defines variants (e.g. colors) of your product
+                                  .variations((variationFactory) =>
+                                      yourProduct.variants.map((variation) =>
+
+                                          // Mandatory
+                                          // The variationFactory method contains a new chain
+                                          // These are methods specific to this actual product variation
+                                          variationFactory()
+
+                                              // Mandatory
+                                              // Name of the variation
+                                              .name(variation.title)
+
+                                              // Optional
+                                              // Displayed below the price of the product
+                                              .subtitle(yourProduct.brand)
+
+                                              // Mandatory
+                                              // sku (or any other identifier for your product)
+                                              // specific down to this variation
+                                              .sku(variation.variationId)
+
+                                              // Optional
+                                              // Set whether this variation is in stock
+                                              // if false, the product wont be able to get added to the cart
+                                              // and it will get "Sold out" label when shown in the call
+                                              .inStock(variation.available)
+
+                                              // Mandatory
+                                              // list of image urls for the variation
+                                              // ordered the same as you want it displayed
+                                              .imageUrls(variation.images)
+
+                                              // Mandatory 
+                                              // The price method contains a new chain
+                                              // Defines price for the specific variation
+                                              .price((priceFactory) =>
+                                                  priceFactory
+
+                                                      // Optional
+                                                      // original price (in case current is a sale price)
+                                                      .original(variation.original_price)
+
+                                                      // Mandatory
+                                                      // current price of the product
+                                                      .current(variation.price)
+                                              )
+
+                                              // Mandatory if your products contain more than one variant
+                                              // The attributes method contains a new chain
+                                              // Returned array defines attributes for the unique variation
+                                              .attributes((attribute) =>
+                                                  yourProduct.options.map((attr) =>
+
+                                                      // Mandatory
+                                                      // Attribute identifier and option identifier that identifies the variation
+                                                      attribute(
+                                                          attr.optionId,
+                                                          variation["option" + attr.optionId]
+                                                      )
+                                                  )
+                                              )
+
+                                              // Optional
+                                              // List of extra specifications to show when comparing products.
+                                              // These will show on top of already specified attributes above
+                                              .comparableAttributes((attribute) =>
+                                                  yourProduct.comparableAttributes.map((compAttr) =>
+
+                                                      // Mandatory inside comparableAttributes()
+                                                      // Attribute identifier and option identifier that identifies the variation
+                                                      attribute(compAttr.name, compAttr.option)
+
+
+                                                          // Optional
+                                                          // If not provided, above specifed attribute identifier will replace it
+                                                          // Localized name of the comparable attribute
+                                                          // This will show as an attribute when comparing products
+                                                          .name(compAttr.value)))
+
+                                              // Optional 
+                                              // List of related products 
+                                              // that will be shown in agent product information view
+                                              .relatedProducts((relatedProductFactory) =>
+                                                  yourProduct.relatedProducts.map((relatProd) =>
+
+                                                      // Mandatory inside relatedProducts()
+                                                      // The relatedProductFactory method contains a new chain
+                                                      // These are methods specific to this actual related product
+                                                      relatedProductFactory()
+
+                                                          // Mandatory inside relatedProductFactory()
+                                                          // Title of the related product
+                                                          .title(relatProd.title)
+
+                                                          // Mandatory inside relatedProductFactory()
+                                                          // SKU of the related product
+                                                          // If agent clicks on the related product, the "provide-product-data" event 
+                                                          // will get triggered and pass this specific SKU as a reference
+                                                          .sku(relatProd.sku)
+
+                                                          // Mandatory inside relatedProductFactory()
+                                                          // string of the thumbnail image url for the related product
+                                                          .imageUrl(relatProd.thumbnail)
+
+                                                          // Mandatory inside relatedProductFactory()
+                                                          // The price method contains a new chain
+                                                          // Defines price for the specific variation
+                                                          .price(priceFactory =>
+                                                              priceFactory
+                                                                  // Mandatory inside priceFactory
+                                                                  // current price of the product
+                                                                  .current(relatProd.price))
+                                                  )
+                                              )
+
+                                              // Optional
+                                              // Unique selling points of the variant or product 
+                                              // displayed on the product display page 
+
+                                              // Options: 
+                                              //    BULLETS - expect an array
+                                              //    PARAGRAPH - expects a string
+                                              .details(detail => [
+                                                  detail("BULLETS", yourProduct.details.map(
+                                                      (details) => details))
+                                              ])
+
+                                              // Optional
+                                              // The rating method contains a new chain
+                                              // Defines rating for the specific variant or product
+                                              /// Rating are displayed as stars 
+                                              .rating(ratingFactory =>
+                                                  ratingFactory
+
+                                                      // Mandatory inside ratingFactory
+                                                      // Specify number max value 
+                                                      // This equal to the amount of total stars
+                                                      // For best UI experience we do not recommend exceeding 10
+                                                      .maxValue(yourProduct.rating.maxValue)
+
+                                                      // Mandatory inside ratingFactory
+                                                      // Average rating of your product 
+                                                      // This equals to how many amount of total stars are filled
+                                                      // Should be equal or lower than the maxValue
+                                                      .rating(yourProduct.rating.averageRating)
+
+                                                      // Optional
+                                                      // Number rating of your variant or product
+                                                      // Displayed next to the star ratings
+                                                      .numberOfRatings(yourProduct.rating.numberOfRatings))
+                                      )
+                                  )
+                          )
+                  );
+              });
+          });
+      });
+
+
+      // The Call Widget triggeres 'should-add-item-to-cart' event when:
+      // 1. When an agent clicks on Add to Cart button inside the agent tool
+      oneToOneEmbed.on('should-add-item-to-cart', (addedItem, callback) => {
+
+          storeApi.addToCart(addedItem.sku)
+              .then(() => callback(true))
+              .catch(error => {
+                  if (error.message === yourOutOfStockErrorMessage) {
+                      // Unsuccessful due to 'out of stock'!
+                      callback({
+                          success: false,
+                          reason: "out-of-stock",
+                      });
+                  } else {
+                      // Unsuccessful due to other problems
+                      callback(false);
+                  }
+              });
+      });
+
+      // The Call Widget triggeres 'should-update-item-in-cart' event when:
+      // 1. Whenever the agent modifies product quantity in the virtual cart inside Agent Tool
+      // 2. Whenever the agent adds the same product to the cart that is already in the widget cart
+      oneToOneEmbed.on('should-update-item-in-cart', (updatedItem, callback) => {
+
+          if (updatedItem.quantity > 0) {
+              storeApi.updateItemInCart({
+                  sku: updatedItem.sku,
+                  quantity: updatedItem.quantity,
+              })
+                  .then(() => {
+                      // cart update was successful
+                      callback(true);
+                  })
+                  .catch(error => {
+                      if (error.message === yourOutOfStockErrorMessage) {
+                          // Unsuccessful due to 'out of stock'!
+                          callback({
+                              success: false,
+                              reason: "out-of-stock",
+                          });
+                      } else {
+                          // Unsuccessful due to other problems
+                          callback(false);
+                      }
+                  });
+          }
+
+          // user wants to remove the product from the cart
+          if (updatedItem.quantity === 0) {
+              storeApi.removeItemFromCart(updatedItem.sku)
+                  .then(() => {
+                      // successfully deleted item
+                      callback(true);
+                  })
+                  .catch(() => {
+                      // failed to delete item
+                      callback(false);
+                  });
+          }
+      });
+
+
+      // The Call Widget triggeres 'goto-checkout' event when:
+      // 1. When the customer clicks the Checkout button inside the Call Widget's virtual cart
+      oneToOneEmbed.on('goto-checkout', (event) => {
+
+          // You have two options to open the checkout page: 
+
+          // OPTION 1:
+          // Open checkout url in the same tab (enabled miniplayer)
+          // The miniplayer player might not be compatible with all websites. Read more about how it works here:
+          // https://bambuser.com/docs/one-to-one/floating-player
+          oneToOneEmbed.floatAbove(window.location.origin + "/cart");
+
+          // OPTION 2: 
+          // Open checkout url in new tab and allow call to continue in current tab
+          // window.open(window.top.location.origin + '/cart', '_blank');
+      });
+  }
+</script>
+
+<script id="bambuser-one-to-one" async src="https://one-to-one.bambuser.com/embed.js"></script>
+</body>
+</html>
