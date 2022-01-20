@@ -1,123 +1,65 @@
-
-function getInfoProducts(){
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head id="Head1" runat="server">
+	<title></title>
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
-    var data = {
-        objprod: {
-            sku: "2000388296420"           
-        }
-    }
 
-    $.ajax({
-        //Propiedades de ajax
-        method: "POST",
-        url: "https://app-pe.github.io/lagalleta/buscarinfoskus.js",
-        data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json"
-    }).done(function (info) {
-        //Respuesta del servidor
-        console.log(info);
+    <!-- Menu de 3 campos -->    
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+    
 
-        //valido que la data no sea nula
-        if (info.d != null) {
-            console.log("entro...");
-            //initMap(info);
-            // {
-            //     "productId": "1111",
-            //     "title": "Bambuser Hoodie",
-            //     "description": "World's best hoodie",
-            //     "brand": "Bambuser",
-            //     "price": 100,
-            //     "details": [
-            //         "Loose fit",
-            //         "Cropped length",
-            //         "Functional fabric with soft-touch"
-            //     ],
-            //     "slug": "/product/14/bambuser-hoodie/",
-            //     "collection": "Super soft series",
-            //     "original_price": 150,
-            //     "rating": {
-            //         "averageRating": 4,
-            //         "maxValue": 5,
-            //         "numberOfRatings": 23
-            //     },
-            //     "comparableAttributes": [{
-            //             "name": "Material",
-            //             "value": "Cotton",
-            //             "option": "100%"
-            //         },
-            //         {
-            //             "name": "Washing Instructons",
-            //             "value": "Washing Temperature",
-            //             "option": "40 degrees"
-            //         }
-            //     ],
-            //     "relatedProducts": [{
-            //             "title": "Bambuser Cap",
-            //             "sku": "2222",
-            //             "thumbnail": "https://demo.bambuser.shop/wp-content/uploads/2021/09/cap_600x.jpeg",
-            //             "price": 30
-            //         },
-            //         {
-            //             "title": "Bambuser Tote Bag",
-            //             "sku": "3333",
-            //             "thumbnail": "https://demo.bambuser.shop/wp-content/uploads/2020/09/bb-tote.png",
-            //             "price": 5
-            //         }
-            //     ],
-            //     "options": [{
-            //             "name": "Color",
-            //             "optionId": 1,
-            //             "values": [
-            //                 "Black",
-            //                 "White"
-            //             ]
-            //         },
-            //         {
-            //             "name": "Size",
-            //             "optionId": 2,
-            //             "values": [
-            //                 "Small"
-            //             ]
-            //         }
-            //     ],
-            //     "variants": [{
-            //             "variationId": "1111-black-small",
-            //             "title": "Black Bambuser Hoodie",
-            //             "option1": "Black",
-            //             "option2": "Small",
-            //             "available": true,
-            //             "price": 100,
-            //             "original_price": 150,
-            //             "images": [
-            //                 "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-front.png",
-            //                 "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-right.jpeg",
-            //                 "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-back.jpeg",
-            //                 "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-left.jpeg"
-            //             ]
-            //         },
-            //         {
-            //             "variationId": "1111-white-small",
-            //             "title": "White Bambuser Hoodie",
-            //             "option1": "White",
-            //             "option2": "Small",
-            //             "available": false,
-            //             "price": 100,
-            //             "original_price": 150,
-            //             "images": [
-            //                 "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-front.png",
-            //                 "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-right.jpeg",
-            //                 "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-back.jpeg",
-            //                 "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-left.jpeg"
-            //             ]
-            //         }
-            //     ]
-            // }                
-        } else {                
-            window.parent.location.href = "/Logout.aspx";                                
-        }
+    
+</head>
+<body>
+
+   Pruebas Bambuser...
+    
+
+ 
         
-    }) // cierro done
+	
+   <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>    
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+   
+    <!-- ajax y json -->
+     <!-- Latest jQuery minified -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
     
+    <!-- Script Personalizado -->
+    <script src="https://app-pe.github.io/lagalleta/buscarinfoskus.js"></script>
+    <script src="https://app-pe.github.io/lagalleta/test.js"></script>
+    <script src="buscarinfoskus.js"></script>
+    <script src="test.js"></script>
+    
+    <script>
+        $(function () {
+            getInfoProducts();
+            //listarMatrices();
+            //initMap();
+            //mostrarMapa();
+            //mostrarImagen();
+            //            $("#ddlmatriz").change(function () {
+            //                alert("hola");
+            //            });
 
-}
+
+
+        });
+    </script>
+    
+  
+    
+     
+        
+</body>
+</html>
