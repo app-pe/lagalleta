@@ -153,7 +153,7 @@ function getInfoProducts(sku){
 var uri = "https://www.ripley.com.pe/wcs/resources/store/10651/productview/"+sku;
  
 $.ajax({
-    url : 'https://www.ripley.com.pe/wcs/resources/store/10651/productview',
+    url : uri,
     data : {},
     type : 'GET',
     dataType : 'json',
@@ -177,7 +177,7 @@ $.ajax({
       
        }                
        console.log(yourProduct);
-
+       return yourProduct;
     },
     error : function(xhr, status) {
       console.log(xhr)
@@ -271,7 +271,8 @@ oneToOneEmbed.on("provide-product-data", (event) => {
        sku = ref;
        //const yourProduct = await yourGetProductMethod(sku);
        const yourProduct = await getInfoProducts(sku);
-       console.log("entro...")
+       console.log("entro...........................................................")
+       console.log(yourProduct)
 
        oneToOneEmbed.updateProduct(bambuserId, (productFactory) => {
            return (
