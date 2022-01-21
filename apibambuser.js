@@ -153,7 +153,7 @@ function getInfoProducts(sku){
 var uri = "https://www.ripley.com.pe/wcs/resources/store/10651/productview/"+sku;
  
 $.ajax({
-    url : 'https://www.ripley.com.pe/wcs/resources/store/10651/productview/PMP00001178604',
+    url : 'https://www.ripley.com.pe/wcs/resources/store/10651/productview',
     data : {},
     type : 'GET',
     dataType : 'json',
