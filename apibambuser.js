@@ -216,7 +216,7 @@ function obtenerVariaciones(product){
         }
       });
     });
-    
+        console.log(data);
     /* por diferentes atributos */
     $.each(data, function(k,i){
       if(dataName.indexOf(i.name) === -1){
