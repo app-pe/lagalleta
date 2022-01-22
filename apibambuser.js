@@ -204,7 +204,7 @@ function obtenerOpciones(product){
 
 function obtenerVariaciones(product){
     /* obtiene todos los atributos de los hijos */
-  var variaciones = [], dataName = [], data = [];
+  var variaciones = [], dataName = [], data = [], data2 = [];
   try{
     $.each(product.SKUs, function(k,i){
       $.each(i.Attributes, function(kk,ii){
@@ -212,6 +212,14 @@ function obtenerVariaciones(product){
           data.push({
                     "value": ii.Values[0].values,
                     "name": ii.identifier
+                    });
+        }
+      });
+      $.each(i.prices, function(kk,ii){
+        if(ii.listPrice !== "" && ii.cardPrice !== ""){
+          data2.push({
+                    "listPrice": ii.listPrice,
+                    "cardPrice": ii.cardPrice
                     });
         }
       });
@@ -227,8 +235,10 @@ function obtenerVariaciones(product){
     /* estructura de api */
     $.each(dataName, function(k,i){
       var obj = {};
+      obj.title="Variacion"+k,
       obj.name = i;
       obj.optionId = k;
+      obj.prices = data2;
       obj.values = [];
       $.each(data, function(kk,ii){
         if(i === ii.name && (obj.values).indexOf(ii.value) === -1){
