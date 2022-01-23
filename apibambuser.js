@@ -204,11 +204,10 @@ function obtenerOpciones(product){
 
 function obtenerVariaciones(product){
     /* obtiene todos los atributos de los hijos */
-  var variaciones = [], dataName = [], data = [], dataprices=[];
+  var variaciones = [], dataName = [], data = [];
   try{
     $.each(product.SKUs, function(k,i){
-  var variaciones = [], dataName = [], data = [], dataprices=[];
-        dataprices.push = dataprices.prices[i]; 
+        console.log(i.prices.listPrice);
       $.each(i.Attributes, function(kk,ii){
         if(ii.displayable !== true && ii.displayable !== false && ii.usage === "Defining"){
           data.push({
@@ -219,7 +218,6 @@ function obtenerVariaciones(product){
       });
     });
     console.log(data);
-    console.log(dataprices);
     /* por diferentes atributos */
     $.each(data, function(k,i){
       if(dataName.indexOf(i.name) === -1){
