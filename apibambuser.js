@@ -204,9 +204,9 @@ function obtenerOpciones(product){
 
 function obtenerVariaciones(product){
     /* obtiene todos los atributos de los hijos */
-  var variaciones = [], dataName = [], data = [];
+  var variaciones = [], dataName = [], data = [],dataprices = [];
   try{
-    $.each(product.SKUs, function(k,i,m){
+    $.each(product.SKUs, function(k,i){
       $.each(i.Attributes, function(kk,ii){
         if(ii.displayable !== true && ii.displayable !== false && ii.usage === "Defining"){
           data.push({
@@ -215,22 +215,27 @@ function obtenerVariaciones(product){
                     });
         }
       });
+      $.each(k.prices, function(kk,ii){
+        dataprices.push({
+            "listPrice":ii.listPrice
+        });
+        }); 
     });
     console.log(data);
     /* por diferentes atributos */
-    $.each(data, function(k,i,m){
+    $.each(data, function(k,i){
       if(dataName.indexOf(i.name) === -1){
         dataName.push(i.name);
       }
     });
     console.log(dataName);
     /* estructura de api */
-    $.each(dataName, function(k,i,m){
+    $.each(dataName, function(k,i){
       var obj = {};
       obj.name = i;
       obj.optionId = k;
-      obj.pruebam = m;
       obj.values = [];
+      obj.prices = dataprices;
       $.each(data, function(kk,ii){
         if(i === ii.name && (obj.values).indexOf(ii.value) === -1){
           (obj.values).push(ii.value);
