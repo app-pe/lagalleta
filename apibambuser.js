@@ -216,14 +216,14 @@ function obtenerVariaciones(product){
         }
       });
     });
-        console.log(data);
+    console.log(data);
     /* por diferentes atributos */
     $.each(data, function(k,i){
       if(dataName.indexOf(i.name) === -1){
         dataName.push(i.name);
       }
     });
-    
+    console.log(dataName);
     /* estructura de api */
     $.each(dataName, function(k,i){
       var obj = {};
@@ -238,6 +238,7 @@ function obtenerVariaciones(product){
       variaciones.push(obj);
     });
   }catch(e){}
+  console.log(variaciones);
   return variaciones;
     // "variationId": "1111-black-small",       
     //     "title": "Variacion 1",
