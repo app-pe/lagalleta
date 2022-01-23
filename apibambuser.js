@@ -204,10 +204,9 @@ function obtenerOpciones(product){
 
 function obtenerVariaciones(product){
     /* obtiene todos los atributos de los hijos */
-  var variaciones = [], dataName = [], data = [];
+  var variaciones = [], dataName = [], data = [], tprecio;
   try{
-    $.each(product.SKUs, function(k,i){
-        console.log(i.prices);
+    $.each(product.SKUs, function(k,i){        
       $.each(i.Attributes, function(kk,ii){
         if(ii.displayable !== true && ii.displayable !== false && ii.usage === "Defining"){
           data.push({
@@ -216,8 +215,10 @@ function obtenerVariaciones(product){
                     });
         }
       });
+      tprecio = i.prices[0];
     });
     console.log(data);
+    console.log(tprecio);
     /* por diferentes atributos */
     $.each(data, function(k,i){
       if(dataName.indexOf(i.name) === -1){
