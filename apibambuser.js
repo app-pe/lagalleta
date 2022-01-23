@@ -215,10 +215,10 @@ function obtenerVariaciones(product){
                     });
         }
       });
-      dtprice.push(i.prices[0].listPrice);                
+      dtprice.push(i.prices[k].listPrice);                
     });
-    console.log(data);
-    console.log(dtprice); 
+    console.log(dtprice);
+    console.log(data);     
     //console.log(tprecio);
     /* por diferentes atributos */
     $.each(data, function(k,i){
