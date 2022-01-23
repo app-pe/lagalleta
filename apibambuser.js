@@ -215,13 +215,14 @@ function obtenerVariaciones(product){
                     });
         }
       });
-      $.each(k.prices, function(kk,ii){
+      $.each(k.prices, function(m,n){
         dataprices.push({
-            "listPrice":ii.listPrice
+            "listPrice":n.listPrice
         });
         }); 
     });
     console.log(data);
+    console.log(dataprices);
     /* por diferentes atributos */
     $.each(data, function(k,i){
       if(dataName.indexOf(i.name) === -1){
@@ -235,7 +236,6 @@ function obtenerVariaciones(product){
       obj.name = i;
       obj.optionId = k;
       obj.values = [];
-      obj.prices = dataprices;
       $.each(data, function(kk,ii){
         if(i === ii.name && (obj.values).indexOf(ii.value) === -1){
           (obj.values).push(ii.value);
