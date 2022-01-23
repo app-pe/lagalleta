@@ -218,7 +218,7 @@ function obtenerVariaciones(product){
     });
     console.log(data);
     /* por diferentes atributos */
-    $.each(data, function(k,i){
+    $.each(data, function(k,i,m){
       if(dataName.indexOf(i.name) === -1){
         dataName.push(i.name);
       }
