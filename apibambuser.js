@@ -207,7 +207,7 @@ function obtenerVariaciones(product){
   var variaciones = [], dataName = [], data = [];
   try{
     $.each(product.SKUs, function(k,i){
-        console.log(i.prices.listPrice);
+        console.log(i.prices);
       $.each(i.Attributes, function(kk,ii){
         if(ii.displayable !== true && ii.displayable !== false && ii.usage === "Defining"){
           data.push({
