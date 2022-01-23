@@ -204,7 +204,7 @@ function obtenerOpciones(product){
 
 function obtenerVariaciones(product){
     /* obtiene todos los atributos de los hijos */
-  var variaciones = [], dataName = [], data = [];
+  var variaciones = [], dataName = [], data = [], dtprice = [];
   try{
     $.each(product.SKUs, function(k,i){        
       $.each(i.Attributes, function(kk,ii){
@@ -215,7 +215,7 @@ function obtenerVariaciones(product){
                     });
         }
       });
-      var tp = i;
+      var tp = dtprice.push(i.Price[0].SKUPriceValue);
       console.log(tp);            
     });
     console.log(data);
