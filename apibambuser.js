@@ -215,8 +215,7 @@ function obtenerVariaciones(product){
                     });
         }
       });
-      console.log(i);
-      console.log(k);          
+      console.log("hola");            
     });
     console.log(data);
     //console.log(tprecio);
