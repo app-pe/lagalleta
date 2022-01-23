@@ -206,7 +206,7 @@ function obtenerVariaciones(product){
     /* obtiene todos los atributos de los hijos */
   var variaciones = [], dataName = [], data = [];
   try{
-    $.each(product.SKUs, function(k,i){
+    $.each(product.SKUs, function(k,i,m){
       $.each(i.Attributes, function(kk,ii){
         if(ii.displayable !== true && ii.displayable !== false && ii.usage === "Defining"){
           data.push({
