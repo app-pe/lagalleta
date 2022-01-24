@@ -232,17 +232,17 @@ function obtenerVariaciones(product){
     console.log(dataName);
     /* estructura de api */
     $.each(dataName, function(k,i){
-      var obj = {};
-      var opt2=[];
-
+           
       
       $.each(data, function(kk,ii){
+        var obj = {}; 
+        var opt2=[];
         if(i === ii.name && (opt2).indexOf(ii.value) === -1){
             //opt2.push(ii.value);
             obj.variationId = "Variacion "+kk;
             obj.title = "Variacion "+kk;
             obj.option1 = ii.name;  
-            obj.option2 = opt2.push(ii.value);s
+            obj.option2 = opt2.push(ii.value);
             obj.available = true, 
             obj.price = price;
             obj.images = dtimages;    
