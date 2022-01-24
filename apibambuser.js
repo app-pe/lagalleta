@@ -242,7 +242,7 @@ function obtenerVariaciones(product){
             //opt2.push(ii.value);
             
             obj.option1 = ii.name;  
-            obj.option2 = opt2.push(ii.value);
+            obj.option2 = ii.value;
             obj.available = true, 
             obj.price = price;
             obj.images = dtimages;    
