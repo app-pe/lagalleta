@@ -217,7 +217,7 @@ function obtenerVariaciones(product){
       });
       dtprice.push(i.Price[0].SKUPriceValue);                
     });
-    console.log(dtprice); 
+    //console.log(dtprice); 
     console.log(data);    
     //console.log(tprecio);
     /* por diferentes atributos */
@@ -233,6 +233,7 @@ function obtenerVariaciones(product){
       obj.name = i;
       obj.optionId = k;
       obj.values = [];
+      obj.prices = dtprice;
       $.each(data, function(kk,ii){
         if(i === ii.name && (obj.values).indexOf(ii.value) === -1){
           (obj.values).push(ii.value);
