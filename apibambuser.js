@@ -235,12 +235,12 @@ function obtenerVariaciones(product){
       var obj = {};
       var opt2=[];
 
-        obj.variationId = "Variacion "+k;
-        obj.title = "Variacion "+k;
+      
       $.each(data, function(kk,ii){
         if(i === ii.name && (opt2).indexOf(ii.value) === -1){
             //opt2.push(ii.value);
-            
+            obj.variationId = "Variacion "+kk;
+            obj.title = "Variacion "+kk;
             obj.option1 = ii.name;  
             obj.option2 = ii.value;
             obj.available = true, 
