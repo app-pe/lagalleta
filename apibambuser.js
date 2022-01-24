@@ -206,7 +206,6 @@ function obtenerVariaciones(product){
     /* obtiene todos los atributos de los hijos */
   var variaciones = [], dataName = [], data = [], dtprice = [], dtimages=[];
   try{
-    var price = product.Price[0].priceValue; 
     dtimages.push(product.Attachments[0].path);
     dtimages.push(product.Attachments[1].path);
     $.each(product.SKUs, function(k,i){        
@@ -218,7 +217,7 @@ function obtenerVariaciones(product){
                     });
         }
       });
-      //dtprice.push(i.Price[0].SKUPriceValue);                
+      dtprice.push(i.Price[0].SKUPriceValue);                
     });
     //console.log(dtprice); 
     console.log(data);    
@@ -233,26 +232,19 @@ function obtenerVariaciones(product){
     /* estructura de api */
     $.each(dataName, function(k,i){
       var obj = {};
-      var opt2=[];
-
-      
+      obj.variationId = k;
+      obj.title = "variacion"+k;
+      obj.option1 = i;           
+      obj.values = [];
+      obj.available = true, 
+      obj.price = dtprice[0];
+      obj.images = dtimages;
       $.each(data, function(kk,ii){
-        obj.variationId = "Variacion "+kk;
-        obj.title = "Variacion "+kk;
-        
-        if(i === ii.name && (opt2).indexOf(ii.value) === -1){
-            //opt2.push(ii.value);
-            obj.option1 = ii.name;      
-            obj.option2 = opt2.push(ii.value);
-            obj.available = true, 
-            obj.price = price;
-            obj.images = dtimages;    
-            variaciones.push(obj);
+        if(i === ii.name && (obj.values).indexOf(ii.value) === -1){
+          (obj.values).push(ii.value);
         }
       });
-              
-             
-      //variaciones.push(obj);
+      variaciones.push(obj);
     });
   }catch(e){}
   console.log(variaciones);
@@ -271,8 +263,7 @@ function formatoObjetoProducto(data){
   var product = data.CatalogEntryView[0],
       obj = {},
       price = product.Price[0].priceValue;
-      var variaciones = [];
-   variaciones = obtenerVariaciones(product);    
+  var variaciones = obtenerVariaciones(product);    
   try{
     obj = {
       "productId": (product.partNumber).toUpperCase(),
