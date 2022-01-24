@@ -231,10 +231,9 @@ function obtenerVariaciones(product){
     });
     console.log(dataName);
     /* estructura de api */
-    var obj = {};
-      var opt2=[];
     $.each(dataName, function(k,i){
-      
+      var obj = {};
+      var opt2=[];
 
       
       $.each(data, function(kk,ii){
