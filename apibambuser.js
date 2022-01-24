@@ -318,7 +318,7 @@ function formatoObjetoProducto(data){
               "Small"
           ]
       }],
-      "variants": JSON.parse(variaciones);
+      "variants": JSON.parse(variaciones)
     //   "variants": [{
     //     "variationId": "1111-black-small",       
     //     "title": "Variacion 1",
