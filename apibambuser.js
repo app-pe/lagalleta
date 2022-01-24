@@ -237,12 +237,12 @@ function obtenerVariaciones(product){
       obj.variationId = "Variacion "+k;
       obj.title = "Variacion "+k;
       obj.option1 = i;           
-      obj.option2 = opt2[k];
+      obj.option2 = opt2[k].value;
       obj.available = true, 
       obj.price = price;
       obj.images = dtimages;
       $.each(data, function(kk,ii){
-        if(i === ii.name && (opt2.indexOf(ii.value) === -1){
+        if(i === ii.name && (opt2).indexOf(ii.value) === -1){
             opt2.push(ii.value);
         }
       });
