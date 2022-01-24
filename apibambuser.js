@@ -154,7 +154,7 @@ function obtenerDetalles(product){
 function obtenerOpciones(product){
   /* obtiene todos los atributos de los hijos */
   var options = [], dataName = [], data = [];
-  try{
+  try{    
     $.each(product.SKUs, function(k,i){
       $.each(i.Attributes, function(kk,ii){
         if(ii.displayable !== true && ii.displayable !== false && ii.usage === "Defining"){
@@ -204,8 +204,10 @@ function obtenerOpciones(product){
 
 function obtenerVariaciones(product){
     /* obtiene todos los atributos de los hijos */
-  var variaciones = [], dataName = [], data = [], dtprice = [];
+  var variaciones = [], dataName = [], data = [], dtprice = [], dtimages=[];
   try{
+    dtimages.push(product.Attachments[0].path);
+    dtimages.push(product.Attachments[1].path);
     $.each(product.SKUs, function(k,i){        
       $.each(i.Attributes, function(kk,ii){
         if(ii.displayable !== true && ii.displayable !== false && ii.usage === "Defining"){
@@ -230,10 +232,13 @@ function obtenerVariaciones(product){
     /* estructura de api */
     $.each(dataName, function(k,i){
       var obj = {};
-      obj.name = i;
-      obj.optionId = k;
+      obj.variationId = k;
+      obj.title = "variacion"+k;
+      obj.option1 = i;           
       obj.values = [];
-      obj.prices = dtprice;
+      obj.available = true, 
+      obj.price = dtprice[0];
+      obj.images = dtimages;
       $.each(data, function(kk,ii){
         if(i === ii.name && (obj.values).indexOf(ii.value) === -1){
           (obj.values).push(ii.value);
