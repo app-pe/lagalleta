@@ -215,7 +215,7 @@ function obtenerVariaciones(product){
                     });
         }
       });
-      dtprice.push(i.Price.SKUPriceValue);                
+      dtprice.push(i.Price[0].SKUPriceValue);                
     });
     console.log(dtprice); 
     console.log(data);    
