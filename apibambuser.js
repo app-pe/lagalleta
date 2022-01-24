@@ -234,19 +234,24 @@ function obtenerVariaciones(product){
     $.each(dataName, function(k,i){
       var obj = {};
       var opt2=[];
+
+      
       $.each(data, function(kk,ii){
         if(i === ii.name && (opt2).indexOf(ii.value) === -1){
-            opt2.push(ii.value);
+            //opt2.push(ii.value);
+            obj.variationId = "Variacion "+kk;
+            obj.title = "Variacion "+kk;
+            obj.option1 = ii.name;  
+            obj.option2 = ii.value;
+            obj.available = true, 
+            obj.price = price;
+            obj.images = dtimages;    
+            variaciones.push(obj);
         }
       });
-      obj.variationId = "Variacion "+k;
-      obj.title = "Variacion "+k;
-      obj.option1 = i;           
-      obj.option2 = opt2[k];
-      obj.available = true, 
-      obj.price = price;
-      obj.images = dtimages;     
-      variaciones.push(obj);
+              
+             
+      //variaciones.push(obj);
     });
   }catch(e){}
   console.log(variaciones);
