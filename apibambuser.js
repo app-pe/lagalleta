@@ -154,7 +154,7 @@ function obtenerDetalles(product){
 function obtenerOpciones(product){
   /* obtiene todos los atributos de los hijos */
   var options = [], dataName = [], data = [];
-  try{
+  try{    
     $.each(product.SKUs, function(k,i){
       $.each(i.Attributes, function(kk,ii){
         if(ii.displayable !== true && ii.displayable !== false && ii.usage === "Defining"){
@@ -190,10 +190,83 @@ function obtenerOpciones(product){
   return options;
 }
 
+// function obtenerValorAtributo(nombre){
+//     var valor = '';
+//     try{
+//       $.each(product.attributes, function(k,i){
+//         if(i.name === nombre && valor === ""){
+//           valor = i.value;
+//         }
+//       });
+//     }catch(e){}
+//     return valor;
+//   }
+
+function obtenerVariaciones(product){
+    /* obtiene todos los atributos de los hijos */
+  var variaciones = [], dataName = [], data = [], dtprice = [], dtimages=[];
+  try{
+    var price = product.Price[0].priceValue; 
+    dtimages.push(product.Attachments[0].path);
+    dtimages.push(product.Attachments[1].path);
+    $.each(product.SKUs, function(k,i){        
+      $.each(i.Attributes, function(kk,ii){
+        if(ii.displayable !== true && ii.displayable !== false && ii.usage === "Defining"){
+          data.push({
+                    "value": ii.Values[0].values,
+                    "name": ii.identifier
+                    });
+        }
+      });
+      //dtprice.push(i.Price[0].SKUPriceValue);                
+    });
+    //console.log(dtprice); 
+    console.log(data);    
+    //console.log(tprecio);
+    /* por diferentes atributos */
+    $.each(data, function(k,i){
+      if(dataName.indexOf(i.name) === -1){
+        dataName.push(i.name);
+      }
+    });
+    console.log(dataName);
+    /* estructura de api */
+    $.each(dataName, function(k,i){
+      var obj = {};
+      var opt2=[];
+      obj.variationId = "Variacion "+k;
+      obj.title = "Variacion "+k;
+      obj.option1 = i;           
+      obj.option2 = opt2[k];
+      obj.available = true, 
+      obj.price = price;
+      obj.images = dtimages;
+      $.each(data, function(kk,ii){
+        if(i === ii.name && (opt2.indexOf(ii.value) === -1){
+            opt2.push(ii.value);
+        }
+      });
+      variaciones.push(obj);
+    });
+  }catch(e){}
+  console.log(variaciones);
+  return variaciones;
+    // "variationId": "1111-black-small",       
+    //     "title": "Variacion 1",
+    //     "option1": "Black",
+    //     "option2": "Small",
+    //     "available": true,
+    //     "price": 100,
+    //     "original_price": 150,
+    //     "images": []
+}
+
 function formatoObjetoProducto(data){
   var product = data.CatalogEntryView[0],
       obj = {},
       price = product.Price[0].priceValue;
+      var variaciones = [];
+   variaciones = obtenerVariaciones(product);    
   try{
     obj = {
       "productId": (product.partNumber).toUpperCase(),
@@ -203,53 +276,8 @@ function formatoObjetoProducto(data){
       "price": parseFloat(price),
       "details": obtenerDetalles(product),
       "slug": "/" + (product.partNumber).toUpperCase(),
-      "original_price": parseFloat(price),
-      "options": [{
-          "name": "Color",
-          "optionId": 1,
-          "values": [
-              "Black",
-              "White"
-          ]
-      },
-      {
-          "name": "Size",
-          "optionId": 2,
-          "values": [
-              "Small"
-          ]
-      }], /*obtenerOpciones(product)*/
-      "variants": [{
-          "variationId": "1111-black-small",
-          "title": "Variacion 1",
-          "option1": "Black",
-          "option2": "Small",
-          "available": true,
-          "price": 100,
-          "original_price": 150,
-          "images": [
-              "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-front.png",
-              "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-right.jpeg",
-              "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-back.jpeg",
-              "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-left.jpeg"
-          ]
-      },
-      {
-          "variationId": "1111-white-small",
-          "title": "Variacion 2",
-          "option1": "White",
-          "option2": "Small",
-          "available": false,
-          "price": 100,
-          "original_price": 150,
-          "images": [
-              "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-front.png",
-              "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-right.jpeg",
-              "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-back.jpeg",
-              "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-left.jpeg"
-          ]
-      }],
       "collection": "P-collection",
+      "original_price": parseFloat(price),    
       "rating": {
           "averageRating": 4,
           "maxValue": 5,
@@ -277,7 +305,53 @@ function formatoObjetoProducto(data){
           "thumbnail": "https://demo.bambuser.shop/wp-content/uploads/2020/09/bb-tote.png",
           "price": 5
       }
-      ]     
+      ],
+      "options": [{
+          "name": "Color",
+          "optionId": 1,
+          "values": [
+              "Black",
+              "White"
+          ]
+      },
+      {
+          "name": "Size",
+          "optionId": 2,
+          "values": [
+              "Small"
+          ]
+      }],
+      "variants": variaciones
+    //   "variants": [{
+    //     "variationId": "1111-black-small",       
+    //     "title": "Variacion 1",
+    //     "option1": "Black",
+    //     "option2": "Small",
+    //     "available": true,
+    //     "price": 100,
+    //     "original_price": 150,
+    //     "images": [
+    //         "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-front.png",
+    //         "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-right.jpeg",
+    //         "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-back.jpeg",
+    //         "https://demo.bambuser.shop/wp-content/uploads/2021/07/black-hoodie-left.jpeg"
+    //     ]
+    // },
+    // {
+    //     "variationId": "1111-white-small",
+    //     "title": "Variacion 2",
+    //     "option1": "White",
+    //     "option2": "Small",
+    //     "available": false,
+    //     "price": 100,
+    //     "original_price": 150,
+    //     "images": [
+    //         "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-front.png",
+    //         "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-right.jpeg",
+    //         "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-back.jpeg",
+    //         "https://demo.bambuser.shop/wp-content/uploads/2021/07/white-hoodie-left.jpeg"
+    //     ]
+    // }]
   };
   }catch(e){console.log(e)}
   return obj;
