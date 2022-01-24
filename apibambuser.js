@@ -277,22 +277,7 @@ function formatoObjetoProducto(data){
           "thumbnail": "https://demo.bambuser.shop/wp-content/uploads/2020/09/bb-tote.png",
           "price": 5
       }
-      ],
-      "options": [{
-          "name": "Color",
-          "optionId": 1,
-          "values": [
-              "Black",
-              "White"
-          ]
-      },
-      {
-          "name": "Size",
-          "optionId": 2,
-          "values": [
-              "Small"
-          ]
-      }]
+      ]     
   };
   }catch(e){console.log(e)}
   return obj;
