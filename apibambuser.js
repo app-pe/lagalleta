@@ -235,14 +235,13 @@ function obtenerVariaciones(product){
       var obj = {};
       obj.variationId = "Variacion "+k;
       obj.title = "Variacion "+k;
-      obj.option1 = option1[i];           
-      obj.option2 = option2[ii];
+      obj.option1 = i;           
+      obj.option2 = obj.option2[k];
       obj.available = true, 
       obj.price = price;
       obj.images = dtimages;
       $.each(data, function(kk,ii){
         if(i === ii.name && (obj.option2).indexOf(ii.value) === -1){
-            (obj.option1).push(i);
             (obj.option2).push(ii.value);
         }
       });
