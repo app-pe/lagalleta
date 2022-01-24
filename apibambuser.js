@@ -246,12 +246,12 @@ function obtenerVariaciones(product){
             obj.available = true, 
             obj.price = price;
             obj.images = dtimages;    
-            variaciones.push(obj);
+            //variaciones.push(obj);
         }
       });
               
              
-      //variaciones.push(obj);
+      variaciones.push(obj);
     });
   }catch(e){}
   console.log(variaciones);
