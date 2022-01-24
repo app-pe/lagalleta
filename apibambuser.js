@@ -235,8 +235,8 @@ function obtenerVariaciones(product){
       var obj = {};
       obj.variationId = "Variacion "+k;
       obj.title = "Variacion "+k;
-      obj.option1 = i;           
-      obj.option2 = ii;
+      obj.option1 = option1[i];           
+      obj.option2 = option2[ii];
       obj.available = true, 
       obj.price = price;
       obj.images = dtimages;
