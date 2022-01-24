@@ -204,7 +204,7 @@ function obtenerOpciones(product){
 
 function obtenerVariaciones(product){
     /* obtiene todos los atributos de los hijos */
-  var variaciones = [], dataName = [], data = [], td;
+  var variaciones = [], dataName = [], data = [], dtprice = [];
   try{
     $.each(product.SKUs, function(k,i){        
       $.each(i.Attributes, function(kk,ii){
@@ -215,10 +215,10 @@ function obtenerVariaciones(product){
                     });
         }
       });
-      //td = i.prices.formattedListPrice;  
-      console.log("xDDDDDDDDDDDDDDDDDDDDDDD");
-    });    
-    console.log(data);     
+      dtprice.push(i.prices.listPrice);                
+    });
+    console.log(dtprice); 
+    console.log(data);    
     //console.log(tprecio);
     /* por diferentes atributos */
     $.each(data, function(k,i){
