@@ -206,6 +206,7 @@ function obtenerVariaciones(product){
     /* obtiene todos los atributos de los hijos */
   var variaciones = [], dataName = [], data = [], dtprice = [], dtimages=[];
   try{
+    var price = product.Price[0].priceValue; 
     dtimages.push(product.Attachments[0].path);
     dtimages.push(product.Attachments[1].path);
     $.each(product.SKUs, function(k,i){        
@@ -217,7 +218,7 @@ function obtenerVariaciones(product){
                     });
         }
       });
-      dtprice.push(i.Price[0].SKUPriceValue);                
+      //dtprice.push(i.Price[0].SKUPriceValue);                
     });
     //console.log(dtprice); 
     console.log(data);    
@@ -232,16 +233,16 @@ function obtenerVariaciones(product){
     /* estructura de api */
     $.each(dataName, function(k,i){
       var obj = {};
-      obj.variationId = k;
-      obj.title = "variacion"+k;
+      obj.variationId = "variacion "+k;
+      obj.title = "variacion "+k;
       obj.option1 = i;           
-      obj.values = [];
+      obj.option2 = [];
       obj.available = true, 
-      obj.price = dtprice[0];
+      obj.price = price;
       obj.images = dtimages;
       $.each(data, function(kk,ii){
-        if(i === ii.name && (obj.values).indexOf(ii.value) === -1){
-          (obj.values).push(ii.value);
+        if(i === ii.name && (obj.option2).indexOf(ii.value) === -1){
+          (obj.option2).push(ii.value);
         }
       });
       variaciones.push(obj);
