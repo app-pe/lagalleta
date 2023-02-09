@@ -12,7 +12,7 @@
 				divContenedor.innerHTML = xhr.responseText;
 			}
 		}
-			xhr.open("get","plantilla,html",true);
+			xhr.open("get","plantilla.html",true);
 			xhr.send();
 	}
 
