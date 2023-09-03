@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title>Tienda Virtual La galleta</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="La galleta" />
+    <meta name="title" content="La galleta">
+    <meta name="author" content="La galleta">
+    <meta name="description" content="La galleta" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Open Graph data -->
+    <meta property="og:title" content="La galleta" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:description" content="La galleta" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="La galleta">
+    <meta name="twitter:image" content="">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- Google tags -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Vollkorn:400,600,600i,700" rel="stylesheet">
+    <!-- own libraries -->    
+    <link href="css/main.css" rel="stylesheet" />    
+    <!-- ajax y json -->
+     <!-- Latest jQuery minified -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css"> 
+    a:link 
+    { 
+    text-decoration:none; 
+    } 
+    </style>
+    <meta name="google-site-verification" content="hCjS0H4TYe50pV9vJRecLt5Hgf5GMjZneqtcSqWxwUA" />
+  </head>
+  <body>
+    <!-- header -->
+    <header>
+
+    </header>
+    <!-- main -->
+    <main role="main">  
+    <div class="form-inline" align="center">
+      
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+            <img src="img/osogalleta.png" class="img-fluid rounded mx-auto d-block mt-2" alt="Responsive image" width="100px" height="150px">
+      <h4><em>Tienda Virtual La galleta</em></h4> 
+
+      <div class="card-header text-center border-0 titulo1 mt-2" style="background-color: #5D5452">
+           <h5 class="slogan">Catálogo de galletas</h5>          
+       </div>
+      <!-- seccion de productos -->
+      <div id="seccionProd"></div>  
+ 
+      </div>
+      <div class="col-lg-2"></div>
+
+
+
+  
+    </div>  
+
+    <div class="card-header text-center border-0 titulo1 mt-2" style="background-color: #5D5452">
+         <h5 class="slogan">Carrito de compras</h5>          
+     </div>
+
+    <div class="row mt-2">      
+      <!-- seccion de información del carrito -->
+      <div class="container" align="center">
+        <!--<h5 class="card-title text-center" id="desProducto">Carrito de compras</h5>-->
+        <div class="col-lg-4 mb-2">
+        <label><strong>Seleccione un medio de pago</strong></label>
+        <select class="form-control" id="mediopago">          
+          <option value="1">Efectivo</option>
+          <option value="2">Bcp</option>
+          <option value="3">Bbva</option>
+          <option value="4">Yape</option>
+          <option value="5">Tunki</option>
+        </select>
+        </div>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <!--<th scope="col">#</th>-->
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
+          </tr>
+        </thead>
+        <tbody id="mitabla">
+      
+        </tbody>
+        <tfoot>
+            <tr>
+              <td></td>
+              <td class="font-weight-bold">Subtotal</td>
+              <td id="subtotal" class="font-weight-bold"></td>
+            </tr>
+          </tfoot>
+      </table>
+
+      </div>
+    </div>
+     <div class="card-header text-center border-0 titulo1 mt-2" style="background-color: #5D5452">
+          <h5 class="slogan">Enviar pedido dando clik al boton WhatsApp</h5>          
+      </div>
+      <!-- canal-whatsapp -->
+      <div class="card-body text-center my-auto" style="height: 60px">
+         <div class="titulo2"><strong>ENVIAR PEDIDO</strong>
+          <a href="#" id="enlace">
+          <img src="img/wasap.jpg" class="center-block img-responsive" alt="" width="30" height="30" onclick="enviarPedido()"> 
+          </a>    
+         </div>  
+      </div>         
+      <!-- footer -->
+          
+        <div class="card-footer" style="background-color: #5D5452">
+          <div class="row"><!--
+            <div class="col-sm-6 text-center">
+              <p class="text-white">
+                <small>Av. Las Vegas 845, Zona Industrial San Juan de Miraflores, Lima-Perú – Phone (+51 1) 205-5656</small>
+              </p>
+            </div>-->
+            <div class="col-sm-12 text-center">
+              <p class="text-white"><small>© 2019 - Tienda Virtual La Galleta - todos los derechos reservados</small></p>    
+            </div>
+          </div>
+        </div>
+      
+    </main>
+   
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  
+    <script type="text/javascript">
+      // variables globales 
+      var chart ="";    
+      var numProd = 3;
+      var conta = 1;
+      var d="";
+      var sub = "0";
+      var listadoProductoCantidad ="";
+
+      // json de productos
+      
+      // var datos = [            
+      //       {
+      //       "producto": "Frac chocolate",
+      //       "imagen": "galletafracchoco.jpg",
+      //       "precio": "1"
+      //       },     
+      //       {
+      //       "producto": "Frac crema de chocolate",
+      //       "imagen": "galletafrac.jpg",
+      //       "precio": "1"
+      //       },       
+      //       {
+      //       "producto": "Frac crema de vainilla",
+      //       "imagen": "galletafracvainilla.jpg",
+      //       "precio": "1"
+      //       }           
+      //       ];
+
+      // cargamos la funcion al inicio
+      window.onload = generar_galeria();
+
+      function generar_galeria() {
+      
+      var xhr = new XMLHttpRequest();
+var url = "https://raw.githubusercontent.com/app-pe/tv-lagalleta/main/js/productos.json";
+xhr.open("GET", url, true);
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        var json = JSON.parse(xhr.responseText);
+        console.log(json);
+    }
+};
+xhr.send();
+                
+       
+      }
+
+      function aumentarCantidad(n){      
+        
+        var valor = document.getElementById('txtcant'+n).value;       
+        
+          if(valor < 10){
+            var suma = parseInt(valor) + parseInt(1);    
+            document.getElementById('txtcant'+n).value = suma;  
+            //conta++;
+          }
+      }
+
+      function disminuirCantidad(n){      
+
+        var valor = document.getElementById('txtcant'+n).value;      
+        
+          if(valor > 1){
+            var resta = parseInt(valor) - parseInt(1);      
+            document.getElementById('txtcant'+n).value = resta;  
+            //conta--;
+          }
+      }
+
+      function agregarCarrito(n){
+        var suma = parseInt(n) + parseInt(1);  
+        // capturar valor de cantidad
+        var cantidad = document.getElementById('txtcant'+n).value;      
+        // capturar producto
+        var producto = document.getElementById('desProducto'+n);          
+        var showproducto = producto.innerHTML;   
+
+        listadoProductoCantidad += "["+showproducto+" / cantidad: "+ cantidad+"] ";   
+        // capturar precio para sumarlo al final y calcular el subtotal
+        var precio = document.getElementById('desPrecio'+n);
+        var showprecio = precio.innerHTML;
+
+        var precioxcant = cantidad*showprecio;        
+        // hasta aqui tengo los valores independientes de cada producto, cantidad y precio cuando doy click en agregar
+
+        // ahora tengo que mostrar enuna tabla estos valores
+        d+= '<tr>'+
+         '<td>'+showproducto+'</td>'+
+         '<td>'+cantidad+'</td>'+
+         '<td>'+'S/ '+precioxcant+'</td>'+
+         '</tr>';
+
+        var element = document.getElementById("mitabla");
+        element.innerHTML = d;
+
+        sub = parseFloat(sub) + parseFloat(precioxcant); 
+        var element2 = document.getElementById("subtotal");
+        element2.innerHTML = "S/ "+sub;
+       //alert(showproducto+" cantidad:"+cantidad+" precio:"+showprecio);
+       
+      }
+
+      function enviarPedido(){
+        // enviar listado de producto, cantidad y subtotal por wasap
+        /* Para obtener el texto */
+        var combo = document.getElementById("mediopago");
+        var mpseleccionado = combo.options[combo.selectedIndex].text;        
+
+        var url = document.getElementById('enlace');
+        var datos = "Pedido: "+listadoProductoCantidad+"[Total: S/ "+sub+"] [Medio Pago: "+mpseleccionado+"]";
+        var clienterecojo = "cliente recojo: "+"Monica";
+        var distritorecojo = "distrito recojo: "+"surco";
+        var distritoentrega = "distrito entrega: "+"sjm";
+        var tipoempaque = "tipo empaque: "+"bolsa 1kg";
+        var tipopago = "tipo pago: "+"bcp";
+        var monto = "monto: S/ "+"20";
+        var horarecojo = "hora recojo: "+"8:00 - 11:00";
+        var horaentrega = "hora entrega: "+"11:00 - 14:00";
+        var fechaentrega = "fecha entrega: "+"15/01/2021";
+        var ubiscacionrecojo = "ubicacion recojo: "+"https://goo.gl/maps/kkUWajYQLArnJDfL9";
+        var ubiscacionentrega = "ubicacion entrega: "+"https://goo.gl/maps/o95iuXboTc3SUDLn6";
+        
+        var baseUrl = "https://api.whatsapp.com/send?phone=51999781083&text="+clienterecojo+"%0D%0A"+
+        distritorecojo+"%0D%0A"+distritoentrega+"%0D%0A"+tipoempaque+"%0D%0A"+tipopago+"%0D%0A"+
+        monto+"%0D%0A"+ubiscacionrecojo+"%0D%0A"+ubiscacionentrega+"%0D%0A"+
+        fechaentrega+"%0D%0A"+horarecojo+"%0D%0A"+horaentrega;
+
+        console.log(url);
+        url.setAttribute('href',baseUrl);
+      }
+
+
+
+
+    </script>
+
+  </body>
+</html>
